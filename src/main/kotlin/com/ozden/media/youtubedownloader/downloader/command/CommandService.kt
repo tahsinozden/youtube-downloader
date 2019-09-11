@@ -12,10 +12,20 @@ class CommandService(@Autowired var commandHelper: CommandHelper) {
     private val processExecutor = ProcessExecutor()
 
     fun getVideoInformation(url: String): VideoInformation {
-        val command = processExecutor.command(commandHelper.jsonData(url))
-        command.readOutput(true)
+        val command = prepareCommand(commandHelper.jsonData(url))
         val output = command.execute().outputString()
         return Gson().fromJson(output, VideoInformation::class.java)
+    }
+
+    fun downloadVideo(url: String, formatCode: String): Int {
+        val command = prepareCommand(commandHelper.downloadVideo(url, formatCode))
+        return command.execute().exitValue
+    }
+
+    private fun prepareCommand(args: List<String>): ProcessExecutor {
+        val command = processExecutor.command(args)
+        command.readOutput(true)
+        return command
     }
 
 }

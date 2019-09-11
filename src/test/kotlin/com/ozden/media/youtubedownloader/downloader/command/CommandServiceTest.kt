@@ -1,8 +1,7 @@
 package com.ozden.media.youtubedownloader.downloader.command
 
+import org.junit.Assert.assertEquals
 import org.junit.Test
-
-import org.junit.Assert.*
 
 class CommandServiceTest {
 
@@ -15,5 +14,11 @@ class CommandServiceTest {
         var actual = commandService.getVideoInformation(URL)
         actual.formats.forEach{ item -> println(item)}
         assertEquals(22, actual.formats.size)
+    }
+
+    @Test
+    fun shouldDownloadVideo() {
+        val actual = commandService.downloadVideo(URL, "22")
+        assertEquals(0, actual)
     }
 }
