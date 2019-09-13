@@ -10,7 +10,7 @@ class CommandHelper(@Value("\${downloader.binary.path}") var downloaderBinaryPat
 
     fun downloadVideo(url: String, formatCode: String?): List<String> {
         val args = arrayListOf(downloaderBinaryPath, url)
-        if (formatCode != null) {
+        formatCode?.let {
             args.addAll(listOf(Command.DOWNLOAD.value, formatCode))
         }
         return args
