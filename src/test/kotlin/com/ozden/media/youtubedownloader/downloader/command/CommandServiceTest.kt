@@ -11,7 +11,7 @@ class CommandServiceTest {
 
     @Test
     fun shouldGetVideoInformation() {
-        var actual = commandService.getVideoInformation(URL)
+        val actual = commandService.getVideoInformation(URL)
         actual.formats.forEach{ item -> println(item)}
         assertEquals(22, actual.formats.size)
     }
@@ -19,6 +19,12 @@ class CommandServiceTest {
     @Test
     fun shouldDownloadVideo() {
         val actual = commandService.downloadVideo(URL, "22")
+        assertEquals(0, actual)
+    }
+
+    @Test
+    fun shouldDownloadBestVideoFormatAvailable() {
+        val actual = commandService.downloadVideo(URL, null)
         assertEquals(0, actual)
     }
 }

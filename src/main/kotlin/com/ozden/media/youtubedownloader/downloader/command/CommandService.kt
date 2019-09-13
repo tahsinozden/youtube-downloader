@@ -17,7 +17,7 @@ class CommandService(@Autowired var commandHelper: CommandHelper) {
         return Gson().fromJson(output, VideoInformation::class.java)
     }
 
-    fun downloadVideo(url: String, formatCode: String): Int {
+    fun downloadVideo(url: String, formatCode: String?): Int {
         val command = prepareCommand(commandHelper.downloadVideo(url, formatCode))
         return command.execute().exitValue
     }

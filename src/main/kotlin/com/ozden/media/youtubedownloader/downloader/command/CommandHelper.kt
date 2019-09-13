@@ -8,6 +8,13 @@ class CommandHelper(@Value("\${downloader.binary.path}") var downloaderBinaryPat
 
     fun jsonData(url: String) = listOf(downloaderBinaryPath, Command.SIMULATE.value, Command.GET_JSON_DATA.value, url)
 
-    fun downloadVideo(url: String, formatCode: String) = listOf(downloaderBinaryPath, url, Command.DOWNLOAD.value, formatCode)
+    fun downloadVideo(url: String, formatCode: String?): List<String> {
+        val args = arrayListOf(downloaderBinaryPath, url)
+        if (formatCode != null) {
+            args.addAll(listOf(Command.DOWNLOAD.value, formatCode))
+        }
+        return args
+    }
+
 
 }
