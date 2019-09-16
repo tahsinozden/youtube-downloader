@@ -7,8 +7,8 @@ import org.springframework.stereotype.Service
 @Service
 class DownloadService(@Autowired var commandHelper: CommandHelper) {
 
-    fun downloadVideo(url: String, formatCode: String?): Int {
-        val command = commandHelper.prepareCommand(commandHelper.downloadVideo(url, formatCode))
+    fun downloadVideo(url: String, formatId: List<String>): Int {
+        val command = commandHelper.prepareCommand(commandHelper.cmdDownloadVideo(url, formatId))
         return command.execute().exitValue
     }
 }

@@ -9,12 +9,12 @@ class CommandHelper(@Value("\${downloader.binary.path}") var downloaderBinaryPat
 
     private val processExecutor = ProcessExecutor()
 
-    fun jsonData(url: String) = listOf(downloaderBinaryPath, Command.SIMULATE.value, Command.GET_JSON_DATA.value, url)
+    fun cmdJsonData(url: String) = listOf(downloaderBinaryPath, Command.SIMULATE.value, Command.GET_JSON_DATA.value, url)
 
-    fun downloadVideo(url: String, formatCode: String?): List<String> {
+    fun cmdDownloadVideo(url: String, formatIds: List<String>): List<String> {
         val args = arrayListOf(downloaderBinaryPath, url)
-        formatCode?.let {
-            args.addAll(listOf(Command.DOWNLOAD.value, formatCode))
+        if (formatIds.isNotEmpty()) {
+            args.addAll(listOf(Command.DOWNLOAD.value, formatIds.joinToString("+")))
         }
         return args
     }

@@ -12,13 +12,13 @@ class DownloadServiceTest {
 
     @Test
     fun shouldDownloadVideo() {
-        val actual = downloadService.downloadVideo(URL, "22")
+        val actual = downloadService.downloadVideo(URL, arrayListOf("22"))
         assertEquals(0, actual)
     }
 
     @Test
     fun shouldDownloadBestVideoFormatAvailable() {
-        val actual = downloadService.downloadVideo(URL, null)
+        val actual = downloadService.downloadVideo(URL, emptyList())
         assertEquals(0, actual)
     }
 }
