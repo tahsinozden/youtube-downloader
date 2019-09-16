@@ -1,11 +1,11 @@
-package com.ozden.media.downloader.video
+package com.ozden.media.video
 
 import com.google.gson.Gson
-import com.ozden.media.downloader.command.CommandHelper
-import com.ozden.media.downloader.video.generated.Format
-import com.ozden.media.downloader.video.generated.VideoInformation
-import com.ozden.media.downloader.video.summary.FormatSummary
-import com.ozden.media.downloader.video.summary.VideoInformationSummary
+import com.ozden.media.command.CommandHelper
+import com.ozden.media.video.generated.Format
+import com.ozden.media.video.generated.VideoInformation
+import com.ozden.media.video.summary.FormatSummary
+import com.ozden.media.video.summary.VideoInformationSummary
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import java.util.stream.Collectors

@@ -1,4 +1,4 @@
-package com.ozden.media.downloader.command
+package com.ozden.media.command
 
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Component

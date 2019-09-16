@@ -1,6 +1,6 @@
-package com.ozden.media.downloader.video
+package com.ozden.media.video
 
-import com.ozden.media.downloader.video.summary.VideoInformationSummary
+import com.ozden.media.video.summary.VideoInformationSummary
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
 

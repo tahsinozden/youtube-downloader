@@ -1,7 +1,5 @@
-package com.ozden.media.downloader.video.summary
+package com.ozden.media.video.summary
 
-
-import com.google.gson.annotations.SerializedName
 
 data class FormatSummary(
     val ext: String,

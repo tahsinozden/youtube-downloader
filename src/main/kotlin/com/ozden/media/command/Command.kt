@@ -1,4 +1,4 @@
-package com.ozden.media.downloader.command
+package com.ozden.media.command
 
 enum class Command(val value: String) {
 

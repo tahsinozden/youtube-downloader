@@ -1,6 +1,6 @@
-package com.ozden.media.downloader.video
+package com.ozden.media.video
 
-import com.ozden.media.downloader.command.CommandHelper
+import com.ozden.media.command.CommandHelper
 import org.junit.Assert.assertEquals
 import org.junit.Test
 

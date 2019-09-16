@@ -1,4 +1,4 @@
-package com.ozden.media.downloader
+package com.ozden.media.download
 
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.RestController

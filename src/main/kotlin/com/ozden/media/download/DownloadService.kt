@@ -1,6 +1,6 @@
-package com.ozden.media.downloader
+package com.ozden.media.download
 
-import com.ozden.media.downloader.command.CommandHelper
+import com.ozden.media.command.CommandHelper
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 

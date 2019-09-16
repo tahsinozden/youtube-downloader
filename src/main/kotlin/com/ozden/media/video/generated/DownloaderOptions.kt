@@ -1,4 +1,4 @@
-package com.ozden.media.downloader.video.generated
+package com.ozden.media.video.generated
 
 
 import com.google.gson.annotations.SerializedName
