@@ -1,10 +1,13 @@
-package com.ozden.media.youtubedownloader.downloader.command
+package com.ozden.media.command
 
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Component
+import org.zeroturnaround.exec.ProcessExecutor
 
 @Component
 class CommandHelper(@Value("\${downloader.binary.path}") var downloaderBinaryPath: String) {
+
+    private val processExecutor = ProcessExecutor()
 
     fun jsonData(url: String) = listOf(downloaderBinaryPath, Command.SIMULATE.value, Command.GET_JSON_DATA.value, url)
 
@@ -16,5 +19,10 @@ class CommandHelper(@Value("\${downloader.binary.path}") var downloaderBinaryPat
         return args
     }
 
+    fun prepareCommand(args: List<String>): ProcessExecutor {
+        val command = processExecutor.command(args)
+        command.readOutput(true)
+        return command
+    }
 
 }

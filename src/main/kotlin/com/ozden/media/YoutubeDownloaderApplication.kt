@@ -1,4 +1,4 @@
-package com.ozden.media.youtubedownloader
+package com.ozden.media
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
