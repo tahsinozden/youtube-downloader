@@ -1,9 +1,9 @@
-package com.ozden.media.youtubedownloader.downloader.video.generated
+package com.ozden.media.downloader.video.generated
 
 
 import com.google.gson.annotations.SerializedName
 
-data class HttpHeaders(
+data class HttpHeadersX(
     @SerializedName("Accept")
     val accept: String,
     @SerializedName("Accept-Charset")

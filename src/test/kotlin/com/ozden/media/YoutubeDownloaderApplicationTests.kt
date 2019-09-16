@@ -1,4 +1,4 @@
-package com.ozden.media.youtubedownloader
+package com.ozden.media
 
 import org.junit.Test
 import org.junit.runner.RunWith
