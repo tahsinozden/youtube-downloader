@@ -13,6 +13,6 @@ class DownloadController(@Autowired val downloadService: DownloadService) {
 
     @PostMapping
     fun downloadVideo(@RequestBody videoRequest: VideoRequest) {
-        downloadService.downloadVideo(videoRequest.url, videoRequest.formatIds ?: emptyList())
+        downloadService.downloadAndServeVideo(videoRequest.url, videoRequest.formatIds ?: emptyList())
     }
 }
