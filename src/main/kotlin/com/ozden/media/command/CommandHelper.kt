@@ -3,7 +3,9 @@ package com.ozden.media.command
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Component
 import org.zeroturnaround.exec.ProcessExecutor
+import java.io.File
 import java.nio.file.Path
+
 
 @Component
 class CommandHelper(@Value("\${downloader.binary.path}") var downloaderBinaryPath: String,
@@ -22,6 +24,16 @@ class CommandHelper(@Value("\${downloader.binary.path}") var downloaderBinaryPat
     }
 
     fun toFullPath(fileName: String) = Path.of(downloadDirectory, fileName).toString()
+
+    fun retrieveRealFileName(fileName: String): String? {
+        val folder = File(downloadDirectory)
+        for (file in folder.listFiles()) {
+            if (file.name.startsWith(fileName)) {
+                return file.name
+            }
+        }
+        return null
+    }
 
     private fun prepareCommand(args: List<String>): ProcessExecutor {
         val command = processExecutor.command(args)
