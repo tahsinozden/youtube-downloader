@@ -10,24 +10,17 @@ class CommandHelper(@Value("\${downloader.binary.path}") var downloaderBinaryPat
 
     private val processExecutor = ProcessExecutor()
 
-    fun cmdJsonData(url: String) = listOf(downloaderBinaryPath, Command.SIMULATE.value, Command.GET_JSON_DATA.value, url)
+    fun cmdJsonData(url: String) = prepareCommand(listOf(downloaderBinaryPath, Command.SIMULATE.value, Command.GET_JSON_DATA.value, url))
 
-    fun cmdDownloadVideo(url: String, formatIds: List<String>, outputFileName: String): List<String> {
+    fun cmdDownloadVideo(url: String, formatIds: List<String>, outputFileName: String): ProcessExecutor {
         val args = arrayListOf(downloaderBinaryPath, url, Command.OUTPUT.value, "$downloadDirectory/$outputFileName")
         if (formatIds.isNotEmpty()) {
             args.addAll(listOf(Command.DOWNLOAD.value, formatIds.joinToString("+")))
         }
-        return args
+        return prepareCommand(args)
     }
 
-//    fun cmdGetFileName(url: String, formatIds: List<String>): List<String> {
-//        val args = arrayListOf<String>()
-//        args.addAll(cmdDownloadVideo(url, formatIds))
-//        args.add(Command.GET_FILE_NAME.value)
-//        return args
-//    }
-
-    fun prepareCommand(args: List<String>): ProcessExecutor {
+    private fun prepareCommand(args: List<String>): ProcessExecutor {
         val command = processExecutor.command(args)
         command.readOutput(true)
         return command

@@ -11,12 +11,6 @@ import java.util.*
 class DownloadService(@Autowired var commandHelper: CommandHelper,
                       @Value("\${downloader.download.directory}") var downloadDirectory: String) {
 
-    fun downloadVideo(url: String, formatIds: List<String>, outputFileName: String): Int {
-        val command = commandHelper.prepareCommand(commandHelper.cmdDownloadVideo(url, formatIds, outputFileName))
-        return command.execute().exitValue
-    }
-
-
     fun downloadAndServeVideo(url: String, formatIds: List<String>): ByteArray {
         val outputFileName = UUID.randomUUID().toString()
         val statusCode = downloadVideo(url, formatIds, outputFileName)
@@ -26,6 +20,11 @@ class DownloadService(@Autowired var commandHelper: CommandHelper,
         }
         val fileName = outputFileName.replace("\n", "")
        return File("$downloadDirectory/$fileName").readBytes()
+    }
+
+    fun downloadVideo(url: String, formatIds: List<String>, outputFileName: String): Int {
+        val command = commandHelper.cmdDownloadVideo(url, formatIds, outputFileName)
+        return command.execute().exitValue
     }
 
     private fun isDownloadSuccess(code: Int): Boolean {
