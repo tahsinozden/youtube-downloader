@@ -4,13 +4,14 @@ import com.ozden.media.command.CommandHelper
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import java.io.File
+import java.io.FileNotFoundException
 import java.util.*
 
 @Service
 class DownloadService(@Autowired var commandHelper: CommandHelper) {
 
     fun downloadAndServeVideo(url: String, formatIds: List<String>): ByteArray {
-        val outputFileName = UUID.randomUUID().toString()
+        var outputFileName = UUID.randomUUID().toString()
         val statusCode = downloadVideo(url, formatIds, outputFileName)
         if (!isDownloadSuccess(statusCode)) {
             // TODO: throw proper exception
@@ -25,7 +26,8 @@ class DownloadService(@Autowired var commandHelper: CommandHelper) {
     }
 
     private fun retrieveFileContent(fileName: String): ByteArray {
-        val file = File(commandHelper.toFullPath(fileName))
+        val name = commandHelper.retrieveRealFileName(fileName)
+        val file = File(commandHelper.toFullPath(name ?: throw FileNotFoundException(fileName)))
         val copiedFileData = file.readBytes().copyOf()
         file.delete()
         return copiedFileData
