@@ -16,7 +16,7 @@ class DownloadService(@Autowired var commandHelper: CommandHelper) {
             // TODO: throw proper exception
             return ByteArray(0)
         }
-        return File("${commandHelper.downloadDirectory}/$outputFileName").readBytes()
+        return File(commandHelper.toFullPath(outputFileName)).readBytes()
     }
 
     fun downloadVideo(url: String, formatIds: List<String>, outputFileName: String): Int {
