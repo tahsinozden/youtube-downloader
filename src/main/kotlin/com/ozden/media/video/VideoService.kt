@@ -14,7 +14,7 @@ import java.util.stream.Collectors
 class VideoService(@Autowired val commandHelper: CommandHelper) {
 
     fun getVideoInformation(url: String): VideoInformation {
-        val command = commandHelper.prepareCommand(commandHelper.cmdJsonData(url))
+        val command = commandHelper.cmdJsonData(url)
         val output = command.execute().outputString()
         return Gson().fromJson(output, VideoInformation::class.java)
     }
