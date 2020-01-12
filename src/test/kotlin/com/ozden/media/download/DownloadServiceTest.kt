@@ -8,7 +8,7 @@ import java.io.File
 
 class DownloadServiceTest {
 
-    private val commandHelper = CommandHelper("src/main/resources/bin/youtube-dl", "/home/tahsin/Documents/downloaded")
+    private val commandHelper = CommandHelper("src/main/resources/bin/youtube-dl", "src/main/resources/downloaded")
     private val downloadService = DownloadService(commandHelper)
     private val URL = "https://www.youtube.com/watch?v=668nUCeBHyY"
 
