@@ -1,6 +1,8 @@
 package com.ozden.media.download
 
 import com.ozden.media.command.CommandHelper
+import com.ozden.media.download.exception.DownloadFailedException
+import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import java.io.File
@@ -10,18 +12,20 @@ import java.util.*
 @Service
 class DownloadService(@Autowired var commandHelper: CommandHelper) {
 
+    val logger = LoggerFactory.getLogger(DownloadService::class.simpleName)
+
     fun downloadAndServeVideo(url: String, formatIds: List<String>): ByteArray {
         var outputFileName = UUID.randomUUID().toString()
-        val statusCode = downloadVideo(url, formatIds, outputFileName)
-        if (!isDownloadSuccess(statusCode)) {
-            // TODO: throw proper exception
-            return ByteArray(0)
-        }
+        downloadVideo(url, formatIds, outputFileName)
         return retrieveFileContent(outputFileName)
     }
 
     fun downloadVideo(url: String, formatIds: List<String>, outputFileName: String): Int {
         val command = commandHelper.cmdDownloadVideo(url, formatIds, outputFileName)
+        val processResult = command.execute()
+        if (!isDownloadSuccess(processResult.exitValue)) {
+            throw DownloadFailedException(processResult.outputUTF8())
+        }
         return command.execute().exitValue
     }
 

@@ -5,6 +5,7 @@ import org.junit.After
 import org.junit.Assert.*
 import org.junit.Test
 import java.io.File
+import java.nio.file.Files
 
 class DownloadServiceTest {
 
@@ -15,6 +16,7 @@ class DownloadServiceTest {
     @After
     fun postProcess() {
         val folder = File(commandHelper.downloadDirectory)
+        folder.listFiles().forEach { file -> Files.deleteIfExists(file.toPath()) }
         assertTrue(folder.listFiles().isEmpty())
     }
 

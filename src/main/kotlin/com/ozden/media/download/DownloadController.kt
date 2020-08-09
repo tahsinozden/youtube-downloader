@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.MediaType
 import org.springframework.web.bind.annotation.*
 
+@CrossOrigin(origins = ["*"])
 @RestController
 @RequestMapping("/api/v1/videos/download")
 class DownloadController(@Autowired val downloadService: DownloadService) {
@@ -18,5 +19,4 @@ class DownloadController(@Autowired val downloadService: DownloadService) {
     fun downloadVideoGet(@RequestParam url: String, @RequestParam formatIds: List<String>): ByteArray {
         return downloadService.downloadAndServeVideo(url, formatIds)
     }
-
 }
