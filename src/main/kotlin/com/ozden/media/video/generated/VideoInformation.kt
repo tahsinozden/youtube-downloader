@@ -94,7 +94,7 @@ data class VideoInformation(
         val url: String,
         val vcodec: String,
         @SerializedName("view_count")
-    val viewCount: Int,
+    val viewCount: Long,
         @SerializedName("webpage_url")
     val webpageUrl: String,
         @SerializedName("webpage_url_basename")
