@@ -8,6 +8,7 @@ import com.ozden.media.video.summary.FormatSummary
 import com.ozden.media.video.summary.VideoInformationSummary
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
+import java.lang.RuntimeException
 import java.util.stream.Collectors
 
 @Service
@@ -16,7 +17,11 @@ class VideoService(@Autowired val commandHelper: CommandHelper) {
     fun getVideoInformation(url: String): VideoInformation {
         val command = commandHelper.cmdJsonData(url)
         val output = command.execute().outputString()
-        return Gson().fromJson(output, VideoInformation::class.java)
+        try {
+            return Gson().fromJson(output, VideoInformation::class.java)
+        } catch (e: Exception) {
+            throw RuntimeException(output)
+        }
     }
 
     fun getVideoInformationSummary(url: String): VideoInformationSummary {
