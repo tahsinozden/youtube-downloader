@@ -3,5 +3,7 @@ services:
   youtube-downloader:
     build: .
     restart: always
+    volumes:
+      - /home/tahsin/Documents/DevApps/downloaded:/app/src/main/resources/bin/downloaded
     ports:
       - "8080:8080"
